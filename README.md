@@ -12,13 +12,16 @@ album2go <YouTube URL> --artist <artist> --album <album> --tracklist <tracklist>
 
 ## Tracklist format
 
-An example of a valid tracklist format is:
+Examples of valid tracklist formats are either of these:
 
 ``` 
-<trackno>. <trackname> <min>:<sec>
+1. Song Name 01:23:45
+2. Song Name - 01:23:45
+3) Song Name 01:23:45
+4) Song Name - 01:23:45
 ``` 
 
-Which translates to:
+That is:
 
 ``` 
 1. Anthropogenic End Transmission 2:16
