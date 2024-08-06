@@ -31,6 +31,22 @@ That is:
 [...]
 ``` 
 
+## Third party dependencies
+
+This software uses `ffmpeg` (required) and `id3v2` (optional, nice to have) to work, one to slice and one to tag audio files respectivelly. 
+
+### `ffmpeg`  
+
+* GNU/Linux, `apt install ffmpeg libmp3lame0` (or your distro equivalent) 
+* macOS, `brew install ffmpeg`
+* Windows, follow [this link](https://www.ffmpeg.org/download.html#build-windows)
+
+### `id3v2`
+
+* GNU/Linux, `apt install id3v2` (or your distro equivalent)
+* macOS, `brew install id3v2`
+* Windows, I'm afraid you're out of luck, you'll have to tag them manually
+
 ## License 
 
 See [LICENSE](LICENSE)
