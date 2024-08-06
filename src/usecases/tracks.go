@@ -12,14 +12,16 @@ import (
 	"github.com/lvm/album2go/src/interfaces"
 )
 
-type ITrackUsecase interface {
-	ProcessTracklist(tracklistFile, artist, album string) ([]domain.Track, error)
-	ProcessAudioFile(outputDir, filename string, track domain.Track) error
-}
+type (
+	ITrackUsecase interface {
+		ProcessTracklist(tracklistFile, artist, album string) ([]domain.Track, error)
+		ProcessAudioFile(outputDir, filename string, track domain.Track) error
+	}
 
-type TrackUsecase struct {
-	AudioProcessor interfaces.IAudioProcessor
-}
+	TrackUsecase struct {
+		AudioProcessor interfaces.IAudioProcessor
+	}
+)
 
 func NewTrackUsecase(audioProcessor interfaces.IAudioProcessor) *TrackUsecase {
 	return &TrackUsecase{AudioProcessor: audioProcessor}

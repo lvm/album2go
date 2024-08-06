@@ -7,13 +7,15 @@ import (
 	"os"
 )
 
-type IYouTube interface {
-	DownloadAudio(url, filename string) error
-}
+type (
+	IYouTube interface {
+		DownloadAudio(url, filename string) error
+	}
 
-type YouTube struct {
-	Client youtube.Client
-}
+	YouTube struct {
+		Client youtube.Client
+	}
+)
 
 func NewYouTubeClient() *YouTube {
 	return &YouTube{Client: youtube.Client{}}

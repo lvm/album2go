@@ -7,12 +7,14 @@ import (
 	"time"
 )
 
-type IAudioProcessor interface {
-	Slice(inputFile string, startTime, endTime time.Time, outputFile string) error
-	Tag(num int, artist, album, title, file string) error
-}
+type (
+	IAudioProcessor interface {
+		Slice(inputFile string, startTime, endTime time.Time, outputFile string) error
+		Tag(num int, artist, album, title, file string) error
+	}
 
-type AudioProcessor struct{}
+	AudioProcessor struct{}
+)
 
 func NewAudioProcessor() *AudioProcessor {
 	return &AudioProcessor{}
