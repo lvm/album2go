@@ -1,4 +1,4 @@
-name: Build
+name: Build album2go
 
 on:
   push:
@@ -40,28 +40,51 @@ jobs:
     - name: Run tests
       run: go test ./...
 
-    - name: Build
-      run: go build -o bin/album2go ./src
+    - name: Build for Linux
+      run: |
+        GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o bin/album2go-linux ./src
 
-    - name: Upload build artifact
+    - name: Build for macOS (Universal)
+      run: |
+        GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o bin/album2go-macos-amd64 ./src
+        GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o bin/album2go-macos-arm64 ./src
+        lipo -create -output bin/album2go-macos-universal bin/album2go-macos-amd64 bin/album2go-macos-arm64
+
+    - name: Build for Windows
+      run: |
+        GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o bin/album2go-windows.exe ./src
+
+    - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: album2go
-        path: bin/album2go
+        name: album2go-linux
+        path: bin/album2go-linux
+
+    - name: Upload macOS Universal build
+      uses: actions/upload-artifact@v3
+      with:
+        name: album2go-macos-universal
+        path: bin/album2go-macos-universal
+
+    - name: Upload Windows build
+      uses: actions/upload-artifact@v3
+      with:
+        name: album2go-windows
+        path: bin/album2go-windows.exe
 
     - name: Create Release
       uses: ncipollo/release-action@v1
       id: create_release
       with:
-        name: "Build: ${{ steps.create_release.outputs.upload_url }}"
+        name: "Release: ${{ github.ref }}"
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: false
         allowUpdates: false
 
-    - name: Upload binary to Release
+    - name: Upload binaries to Release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ github.ref }}
-        file: ./bin/album2go
+        file: ./bin/album2go-*
         file_glob: true
