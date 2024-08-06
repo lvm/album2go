@@ -51,11 +51,12 @@ jobs:
 
     - name: Create Release
       uses: ncipollo/release-action@v1
+      id: create_release
       with:
-        name: "Build: ${{ env.GITHUB_HEAD_REF_SLUG }} ${{ env.GITHUB_SHA_SHORT }}"
+        name: "Build: ${{ steps.create_release.outputs.upload_url }}"
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: false
-        allowUpdates: false       
+        allowUpdates: false
 
     - name: Upload binary to Release
       uses: softprops/action-gh-release@v2
