@@ -3,8 +3,11 @@ package interfaces
 import (
 	"fmt"
 	"os/exec"
+	"runtime"
 	"strconv"
 	"time"
+
+	"github.com/lvm/album2go/src/logger"
 )
 
 type (
@@ -21,13 +24,17 @@ func NewAudioProcessor() *AudioProcessor {
 }
 
 func checkCommand(cmdName string) error {
+	if runtime.GOOS == "windows" {
+		cmdName += ".exe"
+	}
+
 	_, err := exec.LookPath(cmdName)
 	return err
 }
 
 func (p *AudioProcessor) Slice(inputFile string, startTime, endTime time.Time, outputFile string) error {
 	if err := checkCommand("ffmpeg"); err != nil {
-		return fmt.Errorf("ffmeg is not installed (or not in $PATH): %w", err)
+		return fmt.Errorf("ffmpeg is not installed (or not in $PATH): %w", err)
 	}
 
 	cmd := exec.Command(
@@ -44,7 +51,8 @@ func (p *AudioProcessor) Slice(inputFile string, startTime, endTime time.Time, o
 
 func (p *AudioProcessor) Tag(num int, artist, album, title, file string) error {
 	if err := checkCommand("id3v2"); err != nil {
-		return fmt.Errorf("ffmeg is not installed (or not in $PATH): %w", err)
+		logger.Info(fmt.Sprintf("id3v2 is not installed (or not in $PATH): %s", err.Error()))
+		return nil
 	}
 
 	cmd := exec.Command("id3v2", "-a", artist, "-A", album, "-t", title, "-T", strconv.Itoa(num), file)
