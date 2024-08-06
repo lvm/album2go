@@ -59,9 +59,9 @@ jobs:
         allowUpdates: false
 
     - name: Upload binary to Release
-      uses: softprops/action-gh-release@v2
+      uses: svenstaro/upload-release-action@v2
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: bin/album2go
-        asset_name: album2go
-        asset_content_type: application/octet-stream
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref }}
+        file: ./bin/album2go
+        file_glob: true
