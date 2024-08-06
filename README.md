@@ -10,6 +10,24 @@ The next iteration of [youtube-album](https://github.com/lvm/youtube-album) but 
 album2go <YouTube URL> --artist <artist> --album <album> --tracklist <tracklist> --output <directory> [--verbose]
 ```
 
+## Tracklist format
+
+An example of a valid tracklist format is:
+
+``` 
+<trackno>. <trackname> <min>:<sec>
+``` 
+
+Which translates to:
+
+``` 
+1. Anthropogenic End Transmission 2:16
+2. The Geocide 3:43
+3. Be Still Our Bleeding Hearts 3:54
+4. Vulturous 4:59
+[...]
+``` 
+
 ## License 
 
 See [LICENSE](LICENSE)
