@@ -3,7 +3,7 @@ package usecases
 import (
 	"testing"
 
-	"github.com/lvm/album2go/src/interfaces"
+	"github.com/lvm/album2go/internal/interfaces"
 
 	"os"
 

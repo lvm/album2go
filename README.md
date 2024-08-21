@@ -47,6 +47,26 @@ This software uses `ffmpeg` (required) and `id3v2` (optional, nice to have) to w
 * macOS, `brew install id3v2`
 * Windows, I'm afraid you're out of luck, you'll have to tag them manually
 
+## Build
+
+### Linux 
+```
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o bin/album2go-linux .
+```
+
+### macOS
+
+```
+GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o bin/album2go-macos-amd64 .
+GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o bin/album2go-macos-arm64 .
+```
+
+### Windows
+
+```
+GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o bin/album2go-windows.exe .
+```
+
 ## License 
 
 See [LICENSE](LICENSE)

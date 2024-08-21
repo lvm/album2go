@@ -1,4 +1,4 @@
-package domain
+package utils
 
 import (
 	"fmt"
@@ -6,6 +6,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/lvm/album2go/internal/domain"
 )
 
 func parseDuration(durationStr string) (time.Duration, error) {
@@ -25,7 +27,7 @@ func parseDuration(durationStr string) (time.Duration, error) {
 	return duration, nil
 }
 
-func ParseTrack(artist, album, trackInfo string, startTime time.Time) (Track, error) {
+func ParseTrack(artist, album, trackInfo string, startTime time.Time) (domain.Track, error) {
 	re := regexp.MustCompile(`(?P<n>\d+[\.\)])\s+(?P<track>.+?)\s*(-\s+)?(?P<time>(\d{1,2}:)?\d{1,2}:\d{2})`)
 
 	match := re.FindStringSubmatch(trackInfo)
@@ -39,14 +41,14 @@ func ParseTrack(artist, album, trackInfo string, startTime time.Time) (Track, er
 
 		duration, err := parseDuration(params["time"])
 		if err != nil {
-			return Track{}, err
+			return domain.Track{}, err
 		}
 
 		num, _ := strconv.Atoi(strings.Trim(params["n"], ".)"))
 		endTime := startTime.Add(duration)
 
-		return NewTrack(num, artist, album, strings.TrimSpace(params["track"]), duration, startTime, endTime), nil
+		return domain.NewTrack(num, artist, album, strings.TrimSpace(params["track"]), duration, startTime, endTime), nil
 	}
 
-	return Track{}, fmt.Errorf("no matching pattern found")
+	return domain.Track{}, fmt.Errorf("no matching pattern found")
 }

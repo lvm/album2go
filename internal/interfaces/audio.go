@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/lvm/album2go/src/logger"
+	"github.com/lvm/album2go/pkg/logger"
 )
 
 type (

@@ -1,10 +1,12 @@
-package domain
+package utils
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/lvm/album2go/internal/domain"
+	"github.com/stretchr/testify/assert"
 )
 
 func parseDur(dur string) time.Duration {
@@ -53,10 +55,10 @@ func TestParseTrack(t *testing.T) {
 		},
 	}
 
-	var expected Track
+	var expected domain.Track
 	for i, td := range testData {
 		t.Run(fmt.Sprintf("Running test %d", i), func(t *testing.T) {
-			expected = Track{
+			expected = domain.Track{
 				Num:       td.n,
 				Artist:    artist,
 				Album:     album,
