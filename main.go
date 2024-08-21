@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/lvm/album2go/src/cmd"
 	"log"
 	"os"
+
+	"github.com/lvm/album2go/cmd"
 )
 
 func main() {

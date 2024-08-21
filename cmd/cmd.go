@@ -2,11 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/lvm/album2go/src/interfaces"
-	"github.com/lvm/album2go/src/logger"
-	"github.com/lvm/album2go/src/usecases"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/lvm/album2go/internal/interfaces"
+	"github.com/lvm/album2go/internal/usecases"
+	"github.com/lvm/album2go/pkg/logger"
+	"github.com/spf13/cobra"
 )
 
 var (

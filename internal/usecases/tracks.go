@@ -8,8 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/lvm/album2go/src/domain"
-	"github.com/lvm/album2go/src/interfaces"
+	"github.com/lvm/album2go/internal/domain"
+	"github.com/lvm/album2go/internal/interfaces"
+	"github.com/lvm/album2go/internal/utils"
 )
 
 type (
@@ -41,7 +42,7 @@ func (u *TrackUsecase) ProcessTracklist(tracklistFile, artist, album string) ([]
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		track, err := domain.ParseTrack(artist, album, line, startTime)
+		track, err := utils.ParseTrack(artist, album, line, startTime)
 		if err == nil {
 			startTime = track.EndTime
 			tracks = append(tracks, track)
